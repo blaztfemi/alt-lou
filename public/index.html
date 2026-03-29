@@ -1,0 +1,995 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ALT | Alternative Pathways for Careers</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,300;0,400;0,600;0,700;0,800;0,900;1,700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{
+      --ox:#FF5500;--oxhi:#FF7733;--oxlo:rgba(255,85,0,.12);
+      --tl:#00B8A0;
+      --z950:#0D0D0D;--z900:#161616;--z800:#212121;--z700:#2E2E2E;
+      --z600:#3E3E3E;--z500:#5C5C5C;--z400:#8A8A8A;--z300:#B4B4B4;
+      --z200:#D6D6D6;--z100:#EFEFEF;--z50:#F7F7F5;
+      --w:#FFFFFF;--cream:#FAF9F6;
+      --display:'Barlow Condensed',sans-serif;
+      --body:'Outfit',sans-serif;
+      --max:1380px;--r:3px;
+    }
+    html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
+    body{font-family:var(--body);background:var(--w);color:var(--z900);overflow-x:hidden}
+    img{display:block;width:100%;height:100%;object-fit:cover}
+    a{color:inherit;text-decoration:none}
+    button,input,select,textarea{font-family:var(--body)}
+
+    /* PROGRESS */
+    #pb{position:fixed;top:0;left:0;right:0;height:3px;z-index:500;pointer-events:none}
+    #pf{height:100%;background:var(--ox);width:0%;transition:width .06s linear}
+
+    /* SCROLL REVEAL */
+    .sr{opacity:0;transform:translateY(26px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1)}
+    .sr.d1{transition-delay:.08s}.sr.d2{transition-delay:.16s}.sr.d3{transition-delay:.24s}.sr.d4{transition-delay:.32s}
+    .sr.on{opacity:1;transform:none}
+
+    /* NAV */
+    nav{
+      position:fixed;top:0;left:0;right:0;z-index:300;height:62px;
+      display:flex;align-items:center;justify-content:space-between;
+      padding:0 40px;background:rgba(13,13,13,.95);
+      backdrop-filter:blur(22px);border-bottom:1px solid rgba(255,255,255,.04);
+    }
+    .nav-logo{font-family:var(--display);font-size:20px;font-weight:900;color:var(--w);letter-spacing:.04em;text-transform:uppercase;display:flex;align-items:center;gap:9px}
+    .alt-pill{background:var(--ox);color:var(--w);padding:2px 8px;border-radius:2px;font-size:18px;letter-spacing:.08em}
+    .nav-sub{font-size:11px;font-weight:400;letter-spacing:.18em;color:var(--z400);text-transform:uppercase}
+    .nav-links{display:flex;gap:28px;list-style:none}
+    .nav-links a{font-family:var(--display);font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--z400);transition:color .2s}
+    .nav-links a:hover,.nav-links a.active{color:var(--ox)}
+    .nav-cta{
+      font-family:var(--display);font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;
+      padding:9px 22px;background:transparent;color:var(--ox);border:1px solid var(--ox);border-radius:var(--r);
+      transition:background .2s,color .2s;position:relative;overflow:hidden;
+    }
+    .nav-cta::before{content:'';position:absolute;inset:0;background:var(--ox);transform:scaleX(0);transform-origin:left;transition:transform .25s cubic-bezier(.16,1,.3,1)}
+    .nav-cta:hover::before{transform:scaleX(1)}
+    .nav-cta span{position:relative;z-index:1;transition:color .25s}
+    .nav-cta:hover span{color:var(--w)}
+
+    /* HERO — asymmetric split */
+    #hero{position:relative;min-height:100dvh;display:grid;grid-template-columns:55% 45%;overflow:hidden;background:var(--z950)}
+    .hero-left{display:flex;flex-direction:column;justify-content:flex-end;padding:120px 64px 88px;position:relative;z-index:2}
+    .hero-right{position:relative;overflow:hidden}
+    .hero-img-wrap{position:absolute;inset:0;background:url('https://picsum.photos/seed/skilled-trade-worker/900/1100') center/cover no-repeat;filter:brightness(.48) saturate(.75);will-change:transform}
+    .hero-right::after{content:'';position:absolute;inset:0;background:linear-gradient(to right,var(--z950) 0%,transparent 45%)}
+    .hero-grain{position:absolute;inset:0;pointer-events:none;z-index:1;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='.035'/%3E%3C/svg%3E")}
+    .hero-eyebrow{font-family:var(--display);font-size:11px;font-weight:700;letter-spacing:.28em;text-transform:uppercase;color:var(--ox);display:flex;align-items:center;gap:14px;margin-bottom:28px;animation:floatY 4s ease-in-out infinite}
+    .hero-eyebrow::before{content:'';display:block;width:28px;height:1px;background:var(--ox)}
+    @keyframes floatY{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+    .hero-h1{font-family:var(--display);font-size:clamp(68px,9vw,138px);font-weight:900;line-height:.9;letter-spacing:-.01em;text-transform:uppercase;color:var(--w);margin-bottom:34px}
+    .hero-h1 em{font-style:normal;color:var(--ox)}
+    .hero-sub{font-size:clamp(15px,1.4vw,18px);font-weight:400;line-height:1.72;color:var(--z300);max-width:420px;margin-bottom:48px}
+    .hero-btns{display:flex;gap:14px;flex-wrap:wrap}
+    .hero-wm{position:absolute;bottom:40px;right:-20px;font-family:var(--display);font-size:clamp(120px,18vw,260px);font-weight:900;color:rgba(255,255,255,.025);line-height:1;text-transform:uppercase;pointer-events:none;z-index:1;letter-spacing:-.03em}
+    .scroll-pulse{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:6px;z-index:3}
+    .scroll-pulse span{font-family:var(--display);font-size:9px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--z500)}
+    .scroll-line{width:1px;height:44px;background:linear-gradient(to bottom,transparent,var(--ox));animation:pulseY 2.2s ease-in-out infinite}
+    @keyframes pulseY{0%,100%{opacity:.2;transform:scaleY(.5)}50%{opacity:1;transform:scaleY(1)}}
+
+    /* BUTTONS */
+    .btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--display);font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;padding:14px 34px;border-radius:var(--r);cursor:pointer;border:none;transition:transform .15s cubic-bezier(.16,1,.3,1);will-change:transform;position:relative;overflow:hidden}
+    .btn:active{transform:scale(.97)!important}
+    .btn-fill{background:var(--ox);color:var(--w)}
+    .btn-fill::before{content:'';position:absolute;inset:0;background:rgba(255,255,255,.15);transform:scaleX(0);transform-origin:left;transition:transform .25s cubic-bezier(.16,1,.3,1)}
+    .btn-fill:hover::before{transform:scaleX(1)}
+    .btn-line{background:transparent;color:var(--w);border:1px solid rgba(255,255,255,.24)}
+    .btn-line::before{content:'';position:absolute;inset:0;background:rgba(255,85,0,.1);transform:scaleX(0);transform-origin:left;transition:transform .25s cubic-bezier(.16,1,.3,1)}
+    .btn-line:hover{border-color:var(--ox);color:var(--ox)}
+    .btn-line:hover::before{transform:scaleX(1)}
+    .ripple{position:absolute;border-radius:50%;background:rgba(255,255,255,.25);transform:scale(0);animation:rippleAnim .55s ease-out forwards;pointer-events:none}
+    @keyframes rippleAnim{to{transform:scale(4);opacity:0}}
+
+    /* TICKER */
+    .ticker{background:var(--ox);overflow:hidden;padding:13px 0;user-select:none}
+    .ticker-wrap{display:flex;width:max-content;animation:ticker 42s linear infinite}
+    .ticker-wrap:hover{animation-play-state:paused}
+    .ticker-item{font-family:var(--display);font-size:12px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--w);padding:0 32px;display:flex;align-items:center;gap:16px}
+    .ticker-item::after{content:'';width:3px;height:3px;background:rgba(255,255,255,.5);border-radius:50%}
+    @keyframes ticker{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+    /* DISPATCH */
+    .dispatch{background:var(--cream);padding:100px 40px 120px;position:relative}
+    .dispatch::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:var(--z950)}
+    .dispatch-hdr{max-width:var(--max);margin:0 auto 52px;display:flex;align-items:flex-end;justify-content:space-between;gap:40px}
+    .eyebrow{font-family:var(--display);font-size:11px;font-weight:700;letter-spacing:.26em;text-transform:uppercase;color:var(--ox);display:flex;align-items:center;gap:10px;margin-bottom:12px}
+    .eyebrow::before{content:'';display:inline-block;width:20px;height:2px;background:var(--ox)}
+    .sec-h2{font-family:var(--display);font-size:clamp(40px,5.5vw,80px);font-weight:900;line-height:.92;text-transform:uppercase;color:var(--z950)}
+    .sec-h2 em{font-style:normal;color:var(--ox)}
+    .sec-desc{font-size:15px;color:var(--z500);line-height:1.65;max-width:340px;align-self:flex-end}
+    .live-strip{max-width:var(--max);margin:0 auto 52px;background:var(--z950);padding:18px 28px;display:flex;align-items:center;gap:20px;overflow:hidden}
+    .live-badge{font-family:var(--display);font-size:10px;font-weight:900;letter-spacing:.2em;text-transform:uppercase;background:var(--ox);color:var(--w);padding:4px 10px;border-radius:1px;flex-shrink:0;animation:livePulse 2s ease-in-out infinite}
+    @keyframes livePulse{0%,100%{opacity:1}50%{opacity:.65}}
+    .live-track{overflow:hidden;flex:1}
+    .live-inner{display:flex;width:max-content;animation:liveScroll 32s linear infinite}
+    .live-inner:hover{animation-play-state:paused}
+    .live-item{font-family:var(--display);font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--w);padding:0 36px;white-space:nowrap;cursor:pointer;transition:color .2s}
+    .live-item:hover{color:var(--ox)}
+    .live-item::after{content:' /';color:var(--z600);margin-left:6px}
+    @keyframes liveScroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+    /* ACCORDION IMAGE STRIPS */
+    .acc-strips{max-width:var(--max);margin:0 auto;display:flex;gap:6px;height:460px}
+    .strip-panel{position:relative;overflow:hidden;cursor:pointer;border-radius:2px;flex:1;transition:flex .55s cubic-bezier(.16,1,.3,1);min-width:56px}
+    .strip-panel:hover,.strip-panel.sp-active{flex:5}
+    .strip-bg{position:absolute;inset:0;background-size:cover;background-position:center;filter:brightness(.3) saturate(.6);transition:filter .5s ease,transform .6s ease}
+    .strip-panel:hover .strip-bg,.strip-panel.sp-active .strip-bg{filter:brightness(.45) saturate(.85);transform:scale(1.04)}
+    .strip-grad{position:absolute;inset:0;background:linear-gradient(to top,var(--z950) 0%,transparent 60%)}
+    .strip-v{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) rotate(-90deg);font-family:var(--display);font-size:12px;font-weight:800;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.45);white-space:nowrap;transition:opacity .3s}
+    .strip-panel:hover .strip-v,.strip-panel.sp-active .strip-v{opacity:0}
+    .strip-cnt{position:absolute;bottom:0;left:0;right:0;padding:28px;opacity:0;transform:translateY(12px);transition:opacity .4s ease .1s,transform .4s cubic-bezier(.16,1,.3,1) .1s}
+    .strip-panel:hover .strip-cnt,.strip-panel.sp-active .strip-cnt{opacity:1;transform:none}
+    .strip-cat{font-family:var(--display);font-size:10px;font-weight:800;letter-spacing:.22em;text-transform:uppercase;margin-bottom:8px}
+    .cat-story{color:var(--tl)}.cat-news{color:var(--ox)}.cat-path{color:#C8A96E}.cat-ask{color:#A78BFA}
+    .strip-title{font-family:var(--display);font-size:clamp(18px,1.8vw,28px);font-weight:900;line-height:1.05;text-transform:uppercase;color:var(--w);margin-bottom:10px}
+    .strip-body{font-size:13px;line-height:1.68;color:var(--z300);margin-bottom:16px;max-width:500px}
+    .strip-read{font-family:var(--display);font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--ox);display:inline-flex;align-items:center;gap:6px;transition:gap .2s}
+    .strip-read:hover{gap:12px}
+    .strip-read::after{content:'→'}
+    .dispatch-more{max-width:var(--max);margin:28px auto 0;display:flex;justify-content:flex-end}
+    .dispatch-more a{font-family:var(--display);font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--z500);display:inline-flex;align-items:center;gap:8px;transition:color .2s}
+    .dispatch-more a:hover{color:var(--ox)}
+    .dispatch-more a::after{content:'→'}
+
+    /* STATS */
+    .stats{background:var(--z950);padding:0;position:relative;overflow:hidden}
+    .stats::before{content:'ALT';position:absolute;right:-2%;top:50%;transform:translateY(-50%);font-family:var(--display);font-size:22vw;font-weight:900;color:rgba(255,255,255,.025);pointer-events:none;line-height:1}
+    .stats-grid{max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:2px;position:relative;z-index:1}
+    .stat-cell{background:var(--z900);padding:56px 38px;border-top:3px solid transparent;transition:border-color .3s,background .3s}
+    .stat-cell:hover{border-top-color:var(--ox);background:var(--z800)}
+    .stat-num{font-family:var(--display);font-size:clamp(52px,5.5vw,88px);font-weight:900;line-height:1;color:var(--w)}
+    .stat-num .ac{color:var(--ox)}
+    .stat-label{font-size:13px;color:var(--z400);margin-top:14px;line-height:1.55}
+
+    /* PITCH */
+    .pitch{padding:130px 40px;background:var(--w)}
+    .pitch-inner{max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:5fr 7fr;gap:100px;align-items:center}
+    .pitch-h2{font-family:var(--display);font-size:clamp(46px,5.2vw,86px);font-weight:900;line-height:.92;text-transform:uppercase;color:var(--z950)}
+    .pitch-h2 em{font-style:normal;color:var(--ox)}
+    .pitch-rule{width:52px;height:3px;background:var(--ox);margin-bottom:28px}
+    .pitch-body{font-size:17px;font-weight:400;line-height:1.8;color:var(--z600);margin-bottom:22px}
+    .pitch-body strong{color:var(--z950);font-weight:600}
+    .pitch-qs{margin-top:36px;border-left:3px solid var(--ox);padding-left:22px;display:flex;flex-direction:column;gap:16px}
+    .pitch-q{font-family:var(--display);font-size:16px;font-weight:700;letter-spacing:.02em;text-transform:uppercase;color:var(--z700);line-height:1.2}
+
+    /* QUIZ */
+    .quiz{background:var(--z950);padding:100px 40px;position:relative;overflow:hidden}
+    .quiz::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--ox)}
+    .quiz-inner{max-width:960px;margin:0 auto}
+    .quiz-head{text-align:center;margin-bottom:52px}
+    .quiz-eyebrow{font-family:var(--display);font-size:11px;font-weight:700;letter-spacing:.26em;text-transform:uppercase;color:var(--ox);margin-bottom:16px}
+    .quiz-q{font-family:var(--display);font-size:clamp(30px,4.5vw,56px);font-weight:900;text-transform:uppercase;color:var(--w);line-height:1.02}
+    .quiz-q em{font-style:normal;color:var(--ox)}
+    .quiz-opts{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+    .quiz-opt{padding:28px;border:1px solid rgba(255,255,255,.08);border-radius:var(--r);cursor:pointer;text-align:left;background:rgba(255,255,255,.02);color:var(--w);transition:border-color .2s,background .2s,transform .2s cubic-bezier(.16,1,.3,1);position:relative;overflow:hidden}
+    .quiz-opt::after{content:'';position:absolute;inset:0;background:radial-gradient(circle at var(--mx,50%) var(--my,50%),rgba(255,85,0,.08) 0%,transparent 70%);opacity:0;transition:opacity .3s;pointer-events:none}
+    .quiz-opt:hover{border-color:var(--ox);transform:translateY(-2px)}
+    .quiz-opt:hover::after{opacity:1}
+    .quiz-opt:active{transform:scale(.98)}
+    .quiz-opt-label{font-family:var(--display);font-size:20px;font-weight:900;text-transform:uppercase;color:var(--w);line-height:1.1;margin-bottom:8px}
+    .quiz-opt-sub{font-size:13px;color:var(--z400);line-height:1.5}
+    .quiz-prog{display:flex;justify-content:center;gap:8px;margin-bottom:48px}
+    .q-dot{width:40px;height:3px;border-radius:2px;background:rgba(255,255,255,.1);transition:background .3s}
+    .q-dot.active{background:var(--ox)}.q-dot.done{background:rgba(255,85,0,.36)}
+    .quiz-result{display:none;text-align:center;padding:20px 0}
+    .quiz-result.show{display:block}
+    .qr-label{font-family:var(--display);font-size:11px;font-weight:700;letter-spacing:.26em;text-transform:uppercase;color:var(--ox);margin-bottom:20px}
+    .qr-pathway{font-family:var(--display);font-size:clamp(42px,7vw,88px);font-weight:900;text-transform:uppercase;color:var(--w);line-height:.9;margin-bottom:24px}
+    .qr-desc{font-size:16px;color:var(--z300);line-height:1.75;max-width:560px;margin:0 auto 40px}
+    .qr-stats{display:flex;justify-content:center;gap:52px;margin-bottom:44px;flex-wrap:wrap}
+    .qr-sv{font-family:var(--display);font-size:40px;font-weight:900;color:var(--ox);display:block}
+    .qr-sk{font-family:var(--display);font-size:10px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--z400);display:block;margin-top:4px}
+    .qr-actions{display:flex;justify-content:center;gap:16px;flex-wrap:wrap}
+    .quiz-reset{font-family:var(--display);font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--z500);cursor:pointer;background:none;border:none;margin:28px auto 0;display:block;transition:color .2s}
+    .quiz-reset:hover{color:var(--w)}
+
+    /* PATHWAYS — spotlight + tilt cards */
+    .pathways{background:var(--z50);padding:120px 40px}
+    .sec-head{max-width:var(--max);margin:0 auto 52px}
+    .bento{max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr;gap:10px}
+    .card{background:var(--w);border:1px solid var(--z100);padding:32px;position:relative;overflow:hidden;cursor:pointer;border-radius:var(--r);transition:transform .35s cubic-bezier(.16,1,.3,1),box-shadow .35s ease;will-change:transform;transform-style:preserve-3d}
+    .card::before{content:'';position:absolute;inset:0;border-radius:inherit;background:radial-gradient(circle at var(--mx,50%) var(--my,50%),rgba(255,85,0,.07) 0%,transparent 65%);opacity:0;transition:opacity .3s;pointer-events:none;z-index:0}
+    .card:hover::before{opacity:1}
+    .card::after{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--ox);transform:scaleX(0);transform-origin:left;transition:transform .35s cubic-bezier(.16,1,.3,1)}
+    .card:hover{box-shadow:0 24px 64px rgba(0,0,0,.08)}
+    .card:hover::after{transform:scaleX(1)}
+    .card-hero{grid-row:span 2;min-height:520px;background:var(--z950);padding:0;border-color:transparent;display:flex;flex-direction:column;justify-content:flex-end}
+    .card-hero::before,.card-hero::after{display:none}
+    .card-hero:hover{transform:none;box-shadow:none}
+    .card-bg{position:absolute;inset:0;overflow:hidden}
+    .card-bg img{filter:brightness(.28);transition:transform .65s ease}
+    .card-hero:hover .card-bg img{transform:scale(1.05)}
+    .card-hero-ov{position:absolute;inset:0;background:linear-gradient(to top,var(--z950) 22%,transparent 66%);z-index:1}
+    .card-hero-cnt{position:relative;z-index:2;padding:36px}
+    .card-num{font-family:var(--display);font-size:10px;font-weight:800;letter-spacing:.24em;text-transform:uppercase;color:var(--ox);margin-bottom:10px}
+    .card-title{font-family:var(--display);font-size:clamp(20px,2vw,30px);font-weight:900;line-height:1;text-transform:uppercase;margin-bottom:14px}
+    .card-hero .card-title{color:var(--w)}
+    .card:not(.card-hero) .card-title{color:var(--z950);position:relative;z-index:1}
+    .card-stats{display:flex;gap:18px;margin:12px 0;flex-wrap:wrap;position:relative;z-index:1}
+    .csv{font-family:var(--display);font-size:20px;font-weight:900;color:var(--ox);display:block}
+    .csk{font-family:var(--display);font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;display:block}
+    .card-hero .csk{color:var(--z400)}
+    .card:not(.card-hero) .csk{color:var(--z500)}
+    .card-body{font-size:13px;line-height:1.65;margin-bottom:20px;position:relative;z-index:1}
+    .card-hero .card-body{color:var(--z300)}
+    .card:not(.card-hero) .card-body{color:var(--z600)}
+    .card-link{font-family:var(--display);font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--ox);display:inline-flex;align-items:center;gap:6px;transition:gap .2s;position:relative;z-index:1}
+    .card-link:hover{gap:12px}
+    .card-link::after{content:'→'}
+
+    /* WYT */
+    .wyt{background:var(--z950);padding:120px 40px;position:relative;overflow:hidden}
+    .wyt-bg{position:absolute;top:50%;right:-4%;transform:translateY(-50%);font-family:var(--display);font-size:20vw;font-weight:900;color:rgba(255,255,255,.02);pointer-events:none;line-height:.85;text-transform:uppercase;white-space:nowrap}
+    .wyt-inner{max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:4.5fr 7.5fr;gap:100px;align-items:start;position:relative;z-index:2}
+    .wyt-h2{font-family:var(--display);font-size:clamp(46px,5.2vw,82px);font-weight:900;line-height:.92;text-transform:uppercase;color:var(--w);margin-bottom:20px}
+    .wyt-h2 em{font-style:normal;color:var(--ox)}
+    .wyt-sub{font-size:16px;line-height:1.75;color:var(--z300);margin-bottom:36px}
+    .for-parents{display:inline-flex;align-items:center;gap:7px;font-family:var(--display);font-size:10px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--w);background:rgba(0,184,160,.15);border:1px solid var(--tl);padding:5px 12px;border-radius:2px;margin-bottom:20px}
+    .for-parents::before{content:'';width:5px;height:5px;background:var(--tl);border-radius:50%}
+    .wyt-steps{display:flex;flex-direction:column}
+    .wyt-step{display:grid;grid-template-columns:52px 1fr;gap:20px;align-items:start;padding:28px 0;border-bottom:1px solid rgba(255,255,255,.06);transition:padding .25s cubic-bezier(.16,1,.3,1)}
+    .wyt-step:last-child{border-bottom:none}
+    .wyt-step:hover{padding-left:8px}
+    .wyt-num{font-family:var(--display);font-size:38px;font-weight:900;color:var(--ox);line-height:1}
+    .wyt-step-title{font-family:var(--display);font-size:18px;font-weight:900;text-transform:uppercase;color:var(--w);line-height:1.1;margin-bottom:8px}
+    .wyt-step-body{font-size:13px;color:var(--z400);line-height:1.68}
+
+    /* VOICES — 2-col zig-zag */
+    .voices{background:var(--cream);padding:120px 40px}
+    .voices-inner{max-width:var(--max);margin:0 auto}
+    .voices-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:52px}
+    .voice-card{background:var(--w);padding:38px 34px;border:1px solid var(--z100);transition:border-color .25s,transform .3s cubic-bezier(.16,1,.3,1)}
+    .voice-card:hover{border-color:var(--ox);transform:translateY(-4px)}
+    .voice-card.offset{margin-top:40px}
+    .voice-card.wide{grid-column:span 2;display:grid;grid-template-columns:1fr 1fr;gap:48px}
+    .voice-pull{font-family:var(--display);font-size:14px;font-weight:900;text-transform:uppercase;letter-spacing:.02em;color:var(--z950);line-height:1.3;margin-bottom:16px;padding-left:18px;border-left:3px solid var(--ox)}
+    .voice-body{font-size:14px;line-height:1.78;color:var(--z600);margin-bottom:24px;font-style:italic}
+    .voice-who{font-family:var(--display);font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--z700)}
+    .voice-path{font-family:var(--display);font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--ox);margin-top:4px}
+
+    /* ORGS */
+    .orgs{padding:120px 0;background:var(--w);overflow:hidden}
+    .orgs-head{padding:0 40px;max-width:var(--max);margin:0 auto 52px}
+    .orgs-scroller{overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding:4px 40px 24px;cursor:grab}
+    .orgs-scroller:active{cursor:grabbing}
+    .orgs-scroller::-webkit-scrollbar{display:none}
+    .orgs-track{display:flex;gap:12px;width:max-content}
+    .org-card{width:280px;flex-shrink:0;border:1px solid var(--z100);padding:28px 26px;position:relative;overflow:hidden;transition:border-color .25s,transform .25s cubic-bezier(.16,1,.3,1)}
+    .org-card::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at var(--mx,50%) var(--my,50%),rgba(255,85,0,.06) 0%,transparent 60%);opacity:0;transition:opacity .3s;pointer-events:none}
+    .org-card:hover{border-color:var(--ox);transform:translateY(-4px)}
+    .org-card:hover::before{opacity:1}
+    .org-type{font-family:var(--display);font-size:10px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--ox);margin-bottom:10px}
+    .org-name{font-family:var(--display);font-size:17px;font-weight:900;text-transform:uppercase;color:var(--z950);line-height:1.05;margin-bottom:10px;position:relative;z-index:1}
+    .org-body{font-size:13px;color:var(--z500);line-height:1.6;margin-bottom:18px;position:relative;z-index:1}
+    .org-link{font-family:var(--display);font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ox);display:inline-flex;align-items:center;gap:6px;transition:gap .2s;position:relative;z-index:1}
+    .org-link:hover{gap:10px}
+    .org-link::after{content:'→'}
+    .org-badge{display:inline-flex;align-items:center;gap:5px;font-family:var(--display);font-size:9px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--tl);margin-top:12px}
+    .org-badge::before{content:'';width:5px;height:5px;background:var(--tl);border-radius:50%}
+
+    /* PARENTS */
+    .parents{background:var(--z50);padding:120px 40px}
+    .parents-inner{max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:4fr 8fr;gap:100px;align-items:start}
+    .parents-h2{font-family:var(--display);font-size:clamp(42px,4.8vw,72px);font-weight:900;line-height:.93;text-transform:uppercase;color:var(--z950);margin-bottom:24px}
+    .parents-h2 em{font-style:normal;color:var(--ox)}
+    .parents-intro{font-size:16px;line-height:1.75;color:var(--z600)}
+    .faq-item{padding:28px 0;border-bottom:1px solid var(--z100);cursor:pointer}
+    .faq-item:first-child{border-top:1px solid var(--z100)}
+    .faq-q{font-family:var(--display);font-size:17px;font-weight:900;text-transform:uppercase;color:var(--z950);line-height:1.15;display:flex;justify-content:space-between;align-items:start;gap:20px;transition:color .2s}
+    .faq-item:hover .faq-q{color:var(--ox)}
+    .faq-arrow{font-size:18px;color:var(--ox);transition:transform .25s cubic-bezier(.16,1,.3,1);flex-shrink:0;margin-top:2px}
+    .faq-item.open .faq-arrow{transform:rotate(45deg)}
+    .faq-a{font-size:14px;color:var(--z600);line-height:1.75;max-height:0;overflow:hidden;transition:max-height .4s cubic-bezier(.16,1,.3,1),padding .3s}
+    .faq-item.open .faq-a{max-height:400px;padding-top:14px}
+
+    /* CONTRIBUTE */
+    .contribute{background:var(--ox);padding:120px 40px;position:relative;overflow:hidden}
+    .contribute::after{content:'JOIN';position:absolute;font-family:var(--display);font-size:28vw;font-weight:900;color:rgba(0,0,0,.07);bottom:-50px;right:-30px;white-space:nowrap;pointer-events:none;line-height:1}
+    .contribute-inner{max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:5fr 7fr;gap:100px;align-items:center;position:relative;z-index:2}
+    .c-h2{font-family:var(--display);font-size:clamp(46px,5.5vw,84px);font-weight:900;line-height:.92;text-transform:uppercase;color:var(--w);margin-bottom:20px}
+    .c-sub{font-size:16px;line-height:1.75;color:rgba(255,255,255,.82);margin-bottom:12px}
+    .c-note{font-family:var(--display);font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.5)}
+    .c-form{display:flex;flex-direction:column;gap:14px}
+    .f-label{font-family:var(--display);font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.6);margin-bottom:5px;display:block}
+    .f-input,.f-select,.f-ta{width:100%;padding:13px 16px;background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.22);border-radius:var(--r);color:var(--w);font-size:15px;outline:none;transition:border-color .2s,background .2s}
+    .f-input::placeholder,.f-ta::placeholder{color:rgba(255,255,255,.35)}
+    .f-input:focus,.f-select:focus,.f-ta:focus{border-color:rgba(255,255,255,.55);background:rgba(255,255,255,.2)}
+    .f-select option{color:var(--z950);background:var(--w)}
+    .f-ta{height:100px;resize:vertical}
+    .f-submit{align-self:flex-start;font-family:var(--display);font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;padding:14px 38px;background:var(--z950);color:var(--w);border:none;border-radius:var(--r);cursor:pointer;transition:background .2s,transform .15s;position:relative;overflow:hidden}
+    .f-submit:hover{background:var(--z800);transform:translateY(-2px)}
+    .f-submit:active{transform:scale(.97)}
+
+    /* STRIP */
+    .strip{background:var(--z950);padding:56px 40px}
+    .strip-inner{max-width:var(--max);margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:40px}
+    .strip-text{font-family:var(--display);font-size:clamp(26px,3vw,48px);font-weight:900;text-transform:uppercase;color:var(--w);line-height:1}
+    .strip-text em{font-style:normal;color:var(--ox)}
+
+    /* FOOTER */
+    footer{background:var(--z900);padding:64px 40px 36px;border-top:1px solid var(--z800)}
+    .footer-inner{max-width:var(--max);margin:0 auto}
+    .footer-top{display:grid;grid-template-columns:2.5fr 1fr 1fr 1fr;gap:60px;margin-bottom:52px}
+    .f-logo{font-family:var(--display);font-size:22px;font-weight:900;text-transform:uppercase;color:var(--w);display:flex;align-items:center;gap:8px;margin-bottom:6px}
+    .f-logo .alt-pill{background:var(--ox);color:var(--w);padding:1px 7px;border-radius:2px;font-size:19px}
+    .f-tagline{font-size:13px;color:var(--z400);line-height:1.65;max-width:260px;margin-top:10px}
+    .f-col-title{font-family:var(--display);font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--z300);margin-bottom:18px}
+    .f-links{list-style:none;display:flex;flex-direction:column;gap:10px}
+    .f-links a{font-size:13px;color:var(--z500);transition:color .2s}
+    .f-links a:hover{color:var(--ox)}
+    .footer-bottom{border-top:1px solid var(--z800);padding-top:22px;display:flex;align-items:center;justify-content:space-between}
+    .f-copy{font-size:12px;color:var(--z600)}
+    .f-credit{font-family:var(--display);font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--z600)}
+    .f-credit span{color:var(--ox)}
+
+    /* MOBILE */
+    @media(max-width:960px){
+      nav{padding:0 20px}.nav-links{display:none}
+      #hero{grid-template-columns:1fr}.hero-left{padding:100px 24px 60px}.hero-right{display:none}
+      .hero-h1{font-size:clamp(54px,14vw,96px)}
+      .dispatch-hdr{flex-direction:column;align-items:flex-start;gap:16px}
+      .acc-strips{flex-direction:column;height:auto;gap:4px}
+      .strip-panel{flex:none!important;height:180px;min-width:unset}
+      .strip-panel:hover,.strip-panel.sp-active{flex:none!important;height:300px}
+      .strip-cnt{opacity:1;transform:none}
+      .strip-v{display:none}
+      .stats-grid{grid-template-columns:1fr 1fr}
+      .pitch-inner,.wyt-inner,.contribute-inner,.parents-inner{grid-template-columns:1fr;gap:40px}
+      .pitch,.wyt,.contribute,.parents{padding:80px 20px}
+      .bento{grid-template-columns:1fr}.card-hero{min-height:320px}
+      .voices-grid{grid-template-columns:1fr}.voice-card.offset{margin-top:0}.voice-card.wide{grid-column:span 1;display:block}
+      .footer-top{grid-template-columns:1fr;gap:32px}
+      .strip-inner{flex-direction:column;text-align:center}
+      .pathways,.voices,.orgs,.dispatch{padding:80px 20px}
+      .quiz{padding:80px 20px}.quiz-opts{grid-template-columns:1fr}.qr-stats{gap:28px}
+    }
+  </style>
+</head>
+<body>
+
+<div id="pb"><div id="pf"></div></div>
+
+<!-- NAV -->
+<nav id="main-nav">
+  <div class="nav-logo">
+    <span class="alt-pill">ALT</span>
+    <span class="nav-sub">Alternative Pathways</span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#dispatch">The Dispatch</a></li>
+    <li><a href="#pathways">Pathways</a></li>
+    <li><a href="#quiz">Find Your Thing</a></li>
+    <li><a href="#voices">Stories</a></li>
+    <li><a href="#parents">For Parents</a></li>
+    <li><a href="#orgs">Resources</a></li>
+  </ul>
+  <a href="#contribute" class="nav-cta"><span>Share Your Path</span></a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow">Alternative Pathways for Careers</div>
+    <h1 class="hero-h1" aria-label="Skip the Script. Find Your Thing.">
+      Skip the<br>Script.<br><em id="scramble-line">Find Your</em><br><em>Thing.</em>
+    </h1>
+    <p class="hero-sub">The careers nobody mapped. The paths that don't come with a brochure. Real stories, honest numbers, and zero agenda — just the information you need to make a real decision.</p>
+    <div class="hero-btns">
+      <a href="#quiz" class="btn btn-fill mag-btn">Find Your Path</a>
+      <a href="#dispatch" class="btn btn-line mag-btn">Read The Dispatch</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-img-wrap" id="hero-img"></div>
+  </div>
+  <div class="hero-grain"></div>
+  <div class="hero-wm">ALT</div>
+  <div class="scroll-pulse"><div class="scroll-line"></div><span>Scroll</span></div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-wrap">
+    <span class="ticker-item">Electrical Trades</span><span class="ticker-item">Culinary Arts</span>
+    <span class="ticker-item">Healthcare Tech</span><span class="ticker-item">HVAC Systems</span>
+    <span class="ticker-item">Plumbing</span><span class="ticker-item">CDL & Logistics</span>
+    <span class="ticker-item">Solar Energy</span><span class="ticker-item">Welding</span>
+    <span class="ticker-item">Cosmetology</span><span class="ticker-item">Automotive Tech</span>
+    <span class="ticker-item">Construction Mgmt</span><span class="ticker-item">UI Design</span>
+    <span class="ticker-item">Drone Mapping</span><span class="ticker-item">Cybersecurity</span>
+    <span class="ticker-item">Fiber Optics</span><span class="ticker-item">Real Estate</span>
+    <span class="ticker-item">Electrical Trades</span><span class="ticker-item">Culinary Arts</span>
+    <span class="ticker-item">Healthcare Tech</span><span class="ticker-item">HVAC Systems</span>
+    <span class="ticker-item">Plumbing</span><span class="ticker-item">CDL & Logistics</span>
+    <span class="ticker-item">Solar Energy</span><span class="ticker-item">Welding</span>
+    <span class="ticker-item">Cosmetology</span><span class="ticker-item">Automotive Tech</span>
+    <span class="ticker-item">Construction Mgmt</span><span class="ticker-item">UI Design</span>
+    <span class="ticker-item">Drone Mapping</span><span class="ticker-item">Cybersecurity</span>
+    <span class="ticker-item">Fiber Optics</span><span class="ticker-item">Real Estate</span>
+  </div>
+</div>
+
+<!-- DISPATCH -->
+<section class="dispatch" id="dispatch">
+  <div class="dispatch-hdr">
+    <div>
+      <div class="eyebrow sr">Live Feed</div>
+      <h2 class="sec-h2 sr d1">The <em>Dispatch</em></h2>
+    </div>
+    <p class="sec-desc sr d2">News, stories, and links from the world of alternative careers — updated as the landscape shifts. Your feed, not a brochure.</p>
+  </div>
+
+  <div class="live-strip sr">
+    <div class="live-badge">Live</div>
+    <div class="live-track">
+      <div class="live-inner">
+        <span class="live-item">IBEW Local 369 — Apprenticeship applications open through May 15</span>
+        <span class="live-item">New KCTCS workforce grant covers 100% tuition for qualifying trades programs</span>
+        <span class="live-item">ACE Mentor Program Louisville now accepting fall cohort applications</span>
+        <span class="live-item">Study: Trade workers out-earn college grads by year 6 in 34 states</span>
+        <span class="live-item">Louisville construction pipeline hits $12B — skilled worker shortage at record high</span>
+        <span class="live-item">IEC Kentuckiana opens night classes — no waitlist, no prior experience required</span>
+        <span class="live-item">JCTC career assessment program now free for all Kentucky students</span>
+        <span class="live-item">IBEW Local 369 — Apprenticeship applications open through May 15</span>
+        <span class="live-item">New KCTCS workforce grant covers 100% tuition for qualifying trades programs</span>
+        <span class="live-item">ACE Mentor Program Louisville now accepting fall cohort applications</span>
+        <span class="live-item">Study: Trade workers out-earn college grads by year 6 in 34 states</span>
+        <span class="live-item">Louisville construction pipeline hits $12B — skilled worker shortage at record high</span>
+        <span class="live-item">IEC Kentuckiana opens night classes — no waitlist, no prior experience required</span>
+        <span class="live-item">JCTC career assessment program now free for all Kentucky students</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="acc-strips sr d1">
+    <div class="strip-panel sp-active">
+      <div class="strip-bg" style="background-image:url('https://picsum.photos/seed/electrician-sparks/800/600')"></div>
+      <div class="strip-grad"></div>
+      <div class="strip-v">Story</div>
+      <div class="strip-cnt">
+        <div class="strip-cat cat-story">Story</div>
+        <div class="strip-title">"I Make $58K and I'm 21. Here's How."</div>
+        <p class="strip-body">Marcus graduated high school in 2022 with no plan. A guidance counselor handed him a college application. His uncle handed him an IBEW apprenticeship packet. Three years later — $58K, zero debt, a 401K.</p>
+        <a href="#voices" class="strip-read">Read the full story</a>
+      </div>
+    </div>
+    <div class="strip-panel">
+      <div class="strip-bg" style="background-image:url('https://picsum.photos/seed/construction-crane-city/800/600')"></div>
+      <div class="strip-grad"></div>
+      <div class="strip-v">News</div>
+      <div class="strip-cnt">
+        <div class="strip-cat cat-news">News</div>
+        <div class="strip-title">The $12B Construction Boom Nobody Told You About</div>
+        <p class="strip-body">Louisville has more active construction investment than at any point in its history — and not enough trained workers to build it. That gap is your opportunity.</p>
+        <a href="#pathways" class="strip-read">Explore pathways</a>
+      </div>
+    </div>
+    <div class="strip-panel">
+      <div class="strip-bg" style="background-image:url('https://picsum.photos/seed/chef-fire-kitchen/800/600')"></div>
+      <div class="strip-grad"></div>
+      <div class="strip-v">Pathway</div>
+      <div class="strip-cnt">
+        <div class="strip-cat cat-path">Pathway</div>
+        <div class="strip-title">Culinary School vs. the Real Kitchen</div>
+        <p class="strip-body">Five Louisville chefs told us which path they'd take if starting today — and the answer isn't what culinary school marketing wants you to think.</p>
+        <a href="#pathways" class="strip-read">Read it</a>
+      </div>
+    </div>
+    <div class="strip-panel">
+      <div class="strip-bg" style="background-image:url('https://picsum.photos/seed/student-thinking-desk/800/600')"></div>
+      <div class="strip-grad"></div>
+      <div class="strip-v">Question</div>
+      <div class="strip-cnt">
+        <div class="strip-cat cat-ask">Question</div>
+        <div class="strip-title">What Is Naviance and Is There Something Better?</div>
+        <p class="strip-body">High schools love Naviance. It funnels kids toward colleges. Here's what it misses — and what the ALT approach gives you instead.</p>
+        <a href="#quiz" class="strip-read">Find your thing</a>
+      </div>
+    </div>
+    <div class="strip-panel">
+      <div class="strip-bg" style="background-image:url('https://picsum.photos/seed/scholarship-grant-money/800/600')"></div>
+      <div class="strip-grad"></div>
+      <div class="strip-v">Resource</div>
+      <div class="strip-cnt">
+        <div class="strip-cat cat-news">Resource</div>
+        <div class="strip-title">Free KCTCS Trades Programs — The Full List</div>
+        <p class="strip-body">Kentucky Community &amp; Technical College System runs 40+ workforce programs, many fully grant-funded. Here's exactly how to access them.</p>
+        <a href="#orgs" class="strip-read">See resources</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="dispatch-more sr">
+    <a href="#contribute">Submit a story or link to The Dispatch</a>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="stats" id="stats">
+  <div class="stats-grid">
+    <div class="stat-cell sr"><div class="stat-num"><span class="count" data-target="54">0</span><span class="ac">+</span></div><div class="stat-label">Alternative pathways with<br>no 4-year degree required</div></div>
+    <div class="stat-cell sr d1"><div class="stat-num"><span class="ac">$</span><span class="count" data-target="44">0</span><span class="ac">K</span></div><div class="stat-label">Average starting pay in<br>skilled trades, Kentucky</div></div>
+    <div class="stat-cell sr d2"><div class="stat-num"><span class="count" data-target="6">0</span><span class="ac"> yrs</span></div><div class="stat-label">Until trade workers out-earn<br>most college grads on average</div></div>
+    <div class="stat-cell sr d3"><div class="stat-num"><span class="count" data-target="0">0</span><span class="ac"> debt</span></div><div class="stat-label">Required to start most<br>trade apprenticeships in KY</div></div>
+  </div>
+</section>
+
+<!-- PITCH -->
+<section class="pitch" id="about">
+  <div class="pitch-inner">
+    <div class="sr"><h2 class="pitch-h2">College<br>is one<br>road.<br><em>There are<br>fifty more.</em></h2></div>
+    <div class="sr d2">
+      <div class="pitch-rule"></div>
+      <p class="pitch-body">Nobody handed you a map. That's not an accident. The trades, the apprenticeships, the certifications, the emerging fields — programs quietly building real careers for thousands of young people every year <strong>don't advertise on billboards.</strong></p>
+      <p class="pitch-body">ALT exists to change that. We find the paths, tell the stories, and give you real information to make a real decision. Not a guidance counselor's default answer. <strong>The actual picture of what's possible.</strong></p>
+      <p class="pitch-body">Skilled trades pay $40–60K on day one while you're training — with zero debt. Louisville is in the middle of a $12B construction boom with more open positions than it can fill. <strong>The opportunity is real. The path just wasn't on the poster.</strong></p>
+      <div class="pitch-qs">
+        <div class="pitch-q">How do you investigate secure options before committing time and money?</div>
+        <div class="pitch-q">What actually interests you — and why does that matter first?</div>
+        <div class="pitch-q">How do you minimize debt and eliminate fruitless preparation?</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- QUIZ -->
+<section class="quiz" id="quiz">
+  <div class="quiz-inner">
+    <div class="quiz-prog" id="quiz-prog">
+      <div class="q-dot active"></div><div class="q-dot"></div><div class="q-dot"></div>
+    </div>
+    <div id="quiz-question" class="sr">
+      <div class="quiz-head">
+        <div class="quiz-eyebrow" id="quiz-step-label">Question 1 of 3</div>
+        <div class="quiz-q" id="quiz-q-text">What sounds like <em>your</em> kind of day?</div>
+      </div>
+      <div class="quiz-opts" id="quiz-opts"></div>
+    </div>
+    <div class="quiz-result" id="quiz-result">
+      <div class="qr-label">Your ALT Path</div>
+      <div class="qr-pathway" id="qr-pathway-name"></div>
+      <p class="qr-desc" id="qr-pathway-desc"></p>
+      <div class="qr-stats" id="qr-stats"></div>
+      <div class="qr-actions">
+        <a href="#pathways" class="btn btn-fill mag-btn">See the Full Pathway</a>
+        <a href="#contribute" class="btn btn-line mag-btn">Ask a Question</a>
+      </div>
+      <button class="quiz-reset" id="quiz-reset">Start over</button>
+    </div>
+  </div>
+</section>
+
+<!-- PATHWAYS -->
+<section class="pathways" id="pathways">
+  <div class="sec-head">
+    <div class="eyebrow sr">Career Pathways</div>
+    <h2 class="sec-h2 sr d1">Find Your <em>Angle</em></h2>
+    <p class="sec-desc sr d2">Eight paths worth knowing. All build real careers. None require four years and $80K of debt to get started.</p>
+  </div>
+  <div class="bento">
+    <div class="card card-hero sr">
+      <div class="card-bg"><img src="https://picsum.photos/seed/electrical-conduit-work/800/900" alt="Electrical Trades"></div>
+      <div class="card-hero-ov"></div>
+      <div class="card-hero-cnt">
+        <div class="card-num">01 — Featured Pathway</div>
+        <div class="card-title">Electrical Trades</div>
+        <div class="card-stats">
+          <div><span class="csv">$41/hr</span><span class="csk">Journeyman Rate</span></div>
+          <div><span class="csv">4 yrs</span><span class="csk">To Journeyman</span></div>
+          <div><span class="csv">$0</span><span class="csk">IBEW Tuition</span></div>
+        </div>
+        <p class="card-body">The strongest single pathway in Louisville right now. $12B in active regional construction. Two routes in: IBEW Local 369 (union, competitive, elite benefits) or IEC Kentuckiana (non-union, open enrollment, faster path to ownership). Both lead to the same Kentucky journeyman license.</p>
+        <a href="https://www.ibewlocal369.org" target="_blank" rel="noopener" class="card-link">Explore this path</a>
+      </div>
+    </div>
+    <div class="card tilt-card sr d1">
+      <div class="card-num">02 — Trades</div><div class="card-title">HVAC Systems</div>
+      <div class="card-stats"><div><span class="csv">$52K</span><span class="csk">Median KY</span></div><div><span class="csv">18 mo</span><span class="csk">Cert</span></div></div>
+      <p class="card-body">Every building in Louisville needs HVAC. Climate change means demand only grows. JCTC runs a certified program year-round with residential, commercial, and industrial tracks.</p>
+      <a href="https://www.jctcky.edu" target="_blank" rel="noopener" class="card-link">Explore this path</a>
+    </div>
+    <div class="card tilt-card sr d2">
+      <div class="card-num">03 — Healthcare</div><div class="card-title">Healthcare Tech</div>
+      <div class="card-stats"><div><span class="csv">$38K+</span><span class="csk">CNA Start</span></div><div><span class="csv">12 wks</span><span class="csk">Program</span></div></div>
+      <p class="card-body">Surgical tech, CNA, medical assistant, pharmacy tech. Louisville's hospital system is one of the region's largest employers. Many employers pay tuition while you work.</p>
+      <a href="https://www.kctcs.edu/academics/workforce-solutions/" target="_blank" rel="noopener" class="card-link">Explore this path</a>
+    </div>
+    <div class="card tilt-card sr d1">
+      <div class="card-num">04 — Culinary</div><div class="card-title">Culinary Arts</div>
+      <div class="card-stats"><div><span class="csv">$0</span><span class="csk">Stage Cost</span></div><div><span class="csv">$65K+</span><span class="csk">Chef Ceiling</span></div></div>
+      <p class="card-body">Louisville is a genuine food city. Experienced chefs are divided on culinary school. We cover both paths honestly. JCTC culinary and stagé programs are the real starting points.</p>
+      <a href="https://www.jctcky.edu" target="_blank" rel="noopener" class="card-link">Explore this path</a>
+    </div>
+    <div class="card tilt-card sr d2">
+      <div class="card-num">05 — Trades</div><div class="card-title">Welding</div>
+      <div class="card-stats"><div><span class="csv">$48K</span><span class="csk">Certified Avg</span></div><div><span class="csv">6 mo</span><span class="csk">To Cert</span></div></div>
+      <p class="card-body">One of the shortest paths to a skilled trade. Six-month certification. In-demand for automotive, aerospace, and construction. AWS certification is portable nationally. Night classes at JCTC.</p>
+      <a href="https://www.jctcky.edu" target="_blank" rel="noopener" class="card-link">Explore this path</a>
+    </div>
+    <div class="card tilt-card sr d1">
+      <div class="card-num">06 — Trades</div><div class="card-title">Plumbing</div>
+      <div class="card-stats"><div><span class="csv">$58K</span><span class="csk">Journeyman</span></div><div><span class="csv">4 yrs</span><span class="csk">Apprenticeship</span></div></div>
+      <p class="card-body">UA Local 110 runs a fully paid apprenticeship in Louisville. Among the highest-paid trades workers, with strong demand from residential and commercial development.</p>
+      <a href="https://www.ua110.org" target="_blank" rel="noopener" class="card-link">Explore this path</a>
+    </div>
+    <div class="card tilt-card sr d2">
+      <div class="card-num">07 — Logistics</div><div class="card-title">CDL & Logistics</div>
+      <div class="card-stats"><div><span class="csv">$55K+</span><span class="csk">Starting</span></div><div><span class="csv">7 wks</span><span class="csk">CDL Training</span></div></div>
+      <p class="card-body">Louisville is a top logistics hub. UPS, Amazon, Ford, GE — all here, all hiring. CDL-A in 7 weeks. Many carriers pay your training. Fastest path to a six-figure logistics management ceiling.</p>
+      <a href="https://www.kctcs.edu/academics/workforce-solutions/" target="_blank" rel="noopener" class="card-link">Explore this path</a>
+    </div>
+    <div class="card tilt-card sr d1">
+      <div class="card-num">08 — Design + Build</div><div class="card-title">Architecture, Construction & Engineering</div>
+      <div class="card-stats"><div><span class="csv">Free</span><span class="csk">ACE Mentor</span></div><div><span class="csv">$70K+</span><span class="csk">Project Mgr</span></div></div>
+      <p class="card-body">ACE Mentor Program gives high school students free exposure to architecture, construction, and engineering with industry professionals. Entry point for a field that doesn't require a design degree to manage.</p>
+      <a href="https://www.acementor.org/affiliates/louisville" target="_blank" rel="noopener" class="card-link">Explore this path</a>
+    </div>
+  </div>
+</section>
+
+<!-- WYT -->
+<section class="wyt" id="wyt">
+  <div class="wyt-bg">YOUR<br>THING</div>
+  <div class="wyt-inner">
+    <div>
+      <div class="for-parents">For Parents</div>
+      <div class="eyebrow" style="color:var(--ox)">The Framework</div>
+      <h2 class="wyt-h2 sr">Before the<br>Commitment,<br>the <em>Investigation.</em></h2>
+      <p class="wyt-sub sr d1">The most expensive mistake in career preparation is committing significant time and money before knowing if the path is actually right. ALT makes investigation come first.</p>
+      <a href="#quiz" class="btn btn-fill mag-btn sr d2" style="margin-top:8px">Start the Finder</a>
+    </div>
+    <div class="wyt-steps">
+      <div class="wyt-step sr"><div class="wyt-num">01</div><div><div class="wyt-step-title">Identify What Pulls You</div><div class="wyt-step-body">Not a personality type. Not a test score. What actually interests you, and why? The Dispatch, the quiz, and the pathway stories are designed to surface real interests — not match you to whatever's popular.</div></div></div>
+      <div class="wyt-step sr d1"><div class="wyt-num">02</div><div><div class="wyt-step-title">Get a Firsthand View</div><div class="wyt-step-body">Meet people who are already doing it. Job shadow programs, open houses, and mentorships through ACE and the trade organizations give you actual exposure before any commitment.</div></div></div>
+      <div class="wyt-step sr d2"><div class="wyt-num">03</div><div><div class="wyt-step-title">Eliminate What Doesn't Fit</div><div class="wyt-step-body">Crossing a path off the list is not failure — it's progress. Narrow from many possibilities down to the few worth exploring deeply. That's the job of investigation.</div></div></div>
+      <div class="wyt-step sr d3"><div class="wyt-num">04</div><div><div class="wyt-step-title">Follow Up Before You Commit</div><div class="wyt-step-body">Expert advisement. Workplace observation. The organizations in ALT can connect you with field contacts who answer the questions no website can. Then — and only then — commit time and money.</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- VOICES -->
+<section class="voices" id="voices">
+  <div class="voices-inner">
+    <div class="sec-head" style="margin-bottom:0">
+      <div class="eyebrow sr">Community Voices</div>
+      <h2 class="sec-h2 sr d1">People Who <em>Went ALT</em></h2>
+      <p class="sec-desc sr d2">Real people. Real paths. No embellishments, no guarantees.</p>
+    </div>
+    <div class="voices-grid">
+      <div class="voice-card sr">
+        <div class="voice-pull">"I was handed a college application and a shrug."</div>
+        <p class="voice-body">My school's answer to career planning was Naviance and a list of colleges. Nobody mentioned that JCTC had a welding program, that I'd be certified in six months, or that the starting pay would beat most of my friends who went to four-year schools.</p>
+        <div class="voice-who">Dre M., Age 24</div><div class="voice-path">Welding — Certified AWS</div>
+      </div>
+      <div class="voice-card offset sr d1">
+        <div class="voice-pull">"The pay started before I stopped learning."</div>
+        <p class="voice-body">The thing about an apprenticeship nobody tells you is that you get paid while training. I was making $19/hr in year one. By year three I had a 401K and was buying my first car. My college roommate is still paying off his degree and earning about the same.</p>
+        <div class="voice-who">Tasha R., Age 26</div><div class="voice-path">IBEW Local 369 — Year 4 Apprentice</div>
+      </div>
+      <div class="voice-card wide sr d2">
+        <div>
+          <div class="voice-pull">"As a parent, I just needed real numbers."</div>
+          <p class="voice-body">My son wanted to be a chef. My first instinct was culinary school. Then I found out the cost. Then I found out that most of the chefs he admires started by working in actual kitchens, not classrooms. He staged at a restaurant for eight months and got hired. Zero debt.</p>
+        </div>
+        <div>
+          <div class="voice-who">Angela W., Parent</div><div class="voice-path">Supporting a Culinary Career</div>
+          <p class="voice-body" style="margin-top:16px;margin-bottom:0">The hardest part wasn't convincing my son — it was convincing myself that this was a legitimate path. ALT is the resource I needed to have that conversation with confidence instead of fear.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ORGS -->
+<section class="orgs" id="orgs">
+  <div class="orgs-head">
+    <div class="eyebrow sr">Verified Resources</div>
+    <h2 class="sec-h2 sr d1">The Organizations <em>Worth Knowing</em></h2>
+    <p class="sec-desc sr d2">Every link checked. Every organization currently active. No dead ends.</p>
+  </div>
+  <div class="orgs-scroller" id="orgs-scroller">
+    <div class="orgs-track">
+      <div class="org-card"><div class="org-type">Union Apprenticeship</div><div class="org-name">IBEW Local 369</div><p class="org-body">Paid apprenticeship, full benefits, $0 tuition. One of the most competitive and respected programs in Kentucky.</p><a href="https://www.ibewlocal369.org" target="_blank" rel="noopener" class="org-link">Visit</a><div class="org-badge">Verified Active 2026</div></div>
+      <div class="org-card"><div class="org-type">Non-Union Electrical</div><div class="org-name">IEC Kentuckiana</div><p class="org-body">Open enrollment, no waitlist. Faster path to business ownership than union track. Same state license outcome.</p><a href="https://www.ieckentuckiana.org" target="_blank" rel="noopener" class="org-link">Visit</a><div class="org-badge">Verified Active 2026</div></div>
+      <div class="org-card"><div class="org-type">Community College</div><div class="org-name">JCTC</div><p class="org-body">Culinary, HVAC, welding, medical assisting, IT, and 30+ programs. Grant-eligible. Day and night classes available.</p><a href="https://www.jctcky.edu" target="_blank" rel="noopener" class="org-link">Visit</a><div class="org-badge">Verified Active 2026</div></div>
+      <div class="org-card"><div class="org-type">Statewide System</div><div class="org-name">KCTCS</div><p class="org-body">40+ workforce programs across Kentucky. Many fully grant-funded. Backbone of Kentucky's alternative education pipeline.</p><a href="https://www.kctcs.edu/academics/workforce-solutions/" target="_blank" rel="noopener" class="org-link">Visit</a><div class="org-badge">Verified Active 2026</div></div>
+      <div class="org-card"><div class="org-type">Student Mentorship</div><div class="org-name">ACE Mentor Louisville</div><p class="org-body">Free mentorship for high school students in architecture, construction, and engineering. Weekly sessions. No cost. Open enrollment.</p><a href="https://www.acementor.org/affiliates/louisville" target="_blank" rel="noopener" class="org-link">Visit</a><div class="org-badge">Verified Active 2026</div></div>
+      <div class="org-card"><div class="org-type">Workforce Services</div><div class="org-name">KY Career Center</div><p class="org-body">Job placement, training referrals, apprenticeship connections. Free for all Kentucky residents. Multiple Louisville locations.</p><a href="https://kcc.ky.gov" target="_blank" rel="noopener" class="org-link">Visit</a><div class="org-badge">Verified Active 2026</div></div>
+      <div class="org-card"><div class="org-type">Plumbing Apprenticeship</div><div class="org-name">UA Local 110</div><p class="org-body">Fully paid apprenticeship, top-tier benefits. One of the most stable career tracks in Louisville's construction sector.</p><a href="https://www.ua110.org" target="_blank" rel="noopener" class="org-link">Visit</a><div class="org-badge">Verified Active 2026</div></div>
+      <div class="org-card"><div class="org-type">Healthcare Careers</div><div class="org-name">Norton Healthcare</div><p class="org-body">Louisville's largest hospital system runs internal training and tuition assistance for CNA, patient care tech, and surgical tech roles.</p><a href="https://www.nortonhealthcare.com/careers" target="_blank" rel="noopener" class="org-link">Visit</a><div class="org-badge">Verified Active 2026</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PARENTS -->
+<section class="parents" id="parents">
+  <div class="parents-inner">
+    <div>
+      <div class="eyebrow sr">For Parents</div>
+      <h2 class="parents-h2 sr d1">The Questions<br>You're<br><em>Actually</em><br>Asking</h2>
+      <p class="parents-intro sr d2">You want your kid to be secure. That's the whole thing. Here's what the research actually says — without the guilt trip about college, and without the oversell on trades.</p>
+    </div>
+    <div class="parents-faq sr d1">
+      <div class="faq-item"><div class="faq-q">Is a trade career actually stable long-term? <span class="faq-arrow">+</span></div><div class="faq-a">Yes — and increasingly more so than many white-collar fields. AI is automating knowledge work faster than physical skilled trades. An electrician, HVAC tech, or plumber cannot be outsourced or replaced by software. Trade workers consistently out-earn most college graduates within a decade — with significantly less debt. Business ownership by years 6–8 compounds these numbers further.</div></div>
+      <div class="faq-item"><div class="faq-q">What if my child changes their mind after starting? <span class="faq-arrow">+</span></div><div class="faq-a">Most alternative pathways are designed for exactly this. A 6-month welding certification costs a fraction of one semester of college. An HVAC certification takes 18 months. The cost of changing direction is far lower than two years at a four-year university. ALT's framework: investigate first, commit second, treat exploration as the goal — not the failure.</div></div>
+      <div class="faq-item"><div class="faq-q">How do I help my child figure out what they actually want? <span class="faq-arrow">+</span></div><div class="faq-a">Get them exposure before asking for commitment. Job shadows, open house events at JCTC or IEC Kentuckiana, informational interviews with working professionals — these experiences are worth more than any personality test. ALT's Finder quiz is a starting point for conversation, not a verdict. Use it to open doors, not close them.</div></div>
+      <div class="faq-item"><div class="faq-q">What about college — is it completely off the table? <span class="faq-arrow">+</span></div><div class="faq-a">Not at all. ALT isn't anti-college. It's pro-intention. If your child has a specific, concrete reason for a four-year degree — a field that genuinely requires it, a clear career goal — then college makes complete sense. What ALT pushes back on is college as the default answer when no other options have been explored. The question isn't "college or not?" — it's "what path is actually right, and have we looked at all of them?"</div></div>
+      <div class="faq-item"><div class="faq-q">How do I find a mentor in a specific field? <span class="faq-arrow">+</span></div><div class="faq-a">ACE Mentor specifically connects high school students with working professionals in architecture, construction, and engineering at no cost. IBEW, IEC, and the KY Career Center all have direct contact programs. The Contribute section also lets you submit a request for specific field connections — we'll route it to the right people.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTRIBUTE -->
+<section class="contribute" id="contribute">
+  <div class="contribute-inner">
+    <div>
+      <div class="eyebrow" style="color:rgba(255,255,255,.7);margin-bottom:16px">Community</div>
+      <h2 class="c-h2">Share<br>What You<br>Know.</h2>
+      <p class="c-sub">ALT is built on real information from real people. If you have a story, a resource, a connection, or a question — this is where it goes.</p>
+      <p class="c-note" style="margin-top:16px">We review every submission. Good intel makes it into The Dispatch.</p>
+    </div>
+    <form class="c-form" onsubmit="handleSubmit(event)">
+      <div><label class="f-label" for="f-name">Your Name</label><input class="f-input" type="text" id="f-name" placeholder="First name is fine" required></div>
+      <div><label class="f-label" for="f-email">Email (optional)</label><input class="f-input" type="email" id="f-email" placeholder="Only if you want a follow-up"></div>
+      <div>
+        <label class="f-label" for="f-type">What are you sharing?</label>
+        <select class="f-select" id="f-type">
+          <option value="">Choose one</option>
+          <option>My career story</option>
+          <option>A resource or organization</option>
+          <option>A question I can't find an answer to</option>
+          <option>A connection or mentor offer</option>
+          <option>Something for The Dispatch</option>
+        </select>
+      </div>
+      <div><label class="f-label" for="f-msg">Tell us</label><textarea class="f-ta" id="f-msg" placeholder="Keep it real. We read everything." required></textarea></div>
+      <button type="submit" class="f-submit">Submit to ALT</button>
+    </form>
+  </div>
+</section>
+
+<!-- STRIP -->
+<div class="strip"><div class="strip-inner">
+  <div class="strip-text">The path was always there.<br><em>Nobody showed you the map.</em></div>
+  <a href="#quiz" class="btn btn-fill mag-btn">Find Your Path</a>
+</div></div>
+
+<!-- FOOTER -->
+<footer><div class="footer-inner">
+  <div class="footer-top">
+    <div>
+      <div class="f-logo"><span class="alt-pill">ALT</span> Alternative Pathways</div>
+      <p class="f-tagline">The careers nobody mapped. The paths nobody sold. Real stories, honest numbers, and a community that keeps the information alive.</p>
+    </div>
+    <div><div class="f-col-title">Navigate</div><ul class="f-links"><li><a href="#dispatch">The Dispatch</a></li><li><a href="#pathways">Pathways</a></li><li><a href="#quiz">Find Your Thing</a></li><li><a href="#voices">Stories</a></li></ul></div>
+    <div><div class="f-col-title">Support</div><ul class="f-links"><li><a href="#parents">For Parents</a></li><li><a href="#orgs">Resources</a></li><li><a href="#wyt">The Framework</a></li></ul></div>
+    <div><div class="f-col-title">Community</div><ul class="f-links"><li><a href="#contribute">Share Your Path</a></li><li><a href="#contribute">Submit to The Dispatch</a></li><li><a href="#contribute">Offer Mentorship</a></li></ul></div>
+  </div>
+  <div class="footer-bottom">
+    <span class="f-copy">&copy; 2026 ALT — Alternative Pathways for Careers. A community resource.</span>
+    <span class="f-credit">Built by <span>Work Architecture</span></span>
+  </div>
+</div></footer>
+
+<script>
+/* PROGRESS */
+const pf=document.getElementById('pf');
+window.addEventListener('scroll',()=>{pf.style.width=(window.scrollY/(document.body.scrollHeight-window.innerHeight)*100)+'%'},{passive:true});
+
+/* SCROLL REVEAL */
+const srObs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('on');srObs.unobserve(x.target)}})},{threshold:.08,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.sr').forEach(el=>srObs.observe(el));
+
+/* HERO PARALLAX */
+const heroImg=document.getElementById('hero-img');
+window.addEventListener('scroll',()=>{if(heroImg&&window.scrollY<window.innerHeight*1.5)heroImg.style.transform=`translateY(${window.scrollY*.2}px)`},{passive:true});
+
+/* TEXT SCRAMBLE on hero em */
+const CHARS='ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+function scramble(el,final,dur=1300){
+  let t0=null;
+  function frame(ts){
+    if(!t0)t0=ts;
+    const p=Math.min((ts-t0)/dur,1);
+    const rev=Math.floor(p*final.length);
+    let out='';
+    for(let i=0;i<final.length;i++){
+      if(final[i]===' '||final[i]==='\n'){out+=final[i];continue}
+      out+=i<rev?final[i]:CHARS[Math.floor(Math.random()*CHARS.length)];
+    }
+    el.textContent=out;
+    if(p<1)requestAnimationFrame(frame);else el.textContent=final;
+  }
+  requestAnimationFrame(frame);
+}
+window.addEventListener('load',()=>{
+  const em=document.getElementById('scramble-line');
+  if(em)setTimeout(()=>scramble(em,'Find Your'),700);
+});
+
+/* COUNT UP */
+const cObs=new IntersectionObserver(e=>{
+  e.forEach(entry=>{
+    if(!entry.isIntersecting)return;
+    const el=entry.target,target=parseInt(el.dataset.target,10);
+    if(target===0){cObs.unobserve(el);return}
+    let t0=null;
+    function step(ts){if(!t0)t0=ts;const p=Math.min((ts-t0)/1500,1),ease=1-Math.pow(1-p,3);el.textContent=Math.round(ease*target);if(p<1)requestAnimationFrame(step)}
+    requestAnimationFrame(step);cObs.unobserve(el);
+  });
+},{threshold:.4});
+document.querySelectorAll('.count').forEach(el=>cObs.observe(el));
+
+/* SPOTLIGHT radial on cards & orgs */
+document.querySelectorAll('.card:not(.card-hero),.org-card,.quiz-opt').forEach(card=>{
+  card.addEventListener('mousemove',e=>{
+    const r=card.getBoundingClientRect();
+    card.style.setProperty('--mx',((e.clientX-r.left)/r.width*100).toFixed(1)+'%');
+    card.style.setProperty('--my',((e.clientY-r.top)/r.height*100).toFixed(1)+'%');
+  });
+});
+
+/* 3D TILT on .tilt-card */
+document.querySelectorAll('.tilt-card').forEach(card=>{
+  card.addEventListener('mouseenter',()=>{card.style.transition='box-shadow .35s ease'});
+  card.addEventListener('mousemove',e=>{
+    const r=card.getBoundingClientRect();
+    const x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;
+    card.style.transform=`translateY(-6px) perspective(700px) rotateX(${(-y*6).toFixed(2)}deg) rotateY(${(x*6).toFixed(2)}deg)`;
+    card.style.boxShadow=`0 28px 70px rgba(0,0,0,.1), 0 0 0 1px rgba(255,85,0,.15)`;
+  });
+  card.addEventListener('mouseleave',()=>{
+    card.style.transition='transform .5s cubic-bezier(.16,1,.3,1),box-shadow .5s ease';
+    card.style.transform='';card.style.boxShadow='';
+  });
+});
+
+/* MAGNETIC BUTTONS */
+document.querySelectorAll('.mag-btn').forEach(btn=>{
+  btn.addEventListener('mouseenter',()=>{btn.style.transition='transform .1s linear'});
+  btn.addEventListener('mousemove',e=>{
+    const r=btn.getBoundingClientRect();
+    const x=(e.clientX-r.left-r.width/2)*.22,y=(e.clientY-r.top-r.height/2)*.22;
+    btn.style.transform=`translate(${x.toFixed(2)}px,${y.toFixed(2)}px)`;
+  });
+  btn.addEventListener('mouseleave',()=>{
+    btn.style.transition='transform .4s cubic-bezier(.16,1,.3,1)';btn.style.transform='';
+  });
+});
+
+/* RIPPLE */
+document.querySelectorAll('.btn-fill,.f-submit').forEach(btn=>{
+  btn.addEventListener('click',e=>{
+    const r=btn.getBoundingClientRect(),size=Math.max(r.width,r.height);
+    const rip=document.createElement('span');
+    rip.className='ripple';
+    rip.style.cssText=`width:${size}px;height:${size}px;left:${e.clientX-r.left-size/2}px;top:${e.clientY-r.top-size/2}px`;
+    btn.appendChild(rip);setTimeout(()=>rip.remove(),600);
+  });
+});
+
+/* ACCORDION STRIPS */
+const panels=document.querySelectorAll('.strip-panel');
+panels.forEach(p=>{
+  p.addEventListener('mouseenter',()=>{panels.forEach(x=>x.classList.remove('sp-active'));p.classList.add('sp-active')});
+  p.addEventListener('click',()=>{panels.forEach(x=>x.classList.remove('sp-active'));p.classList.add('sp-active')});
+});
+
+/* DRAG SCROLL ORGS */
+const sc=document.getElementById('orgs-scroller');
+if(sc){
+  let dn=false,sx,sl;
+  sc.addEventListener('mousedown',e=>{dn=true;sx=e.pageX-sc.offsetLeft;sl=sc.scrollLeft});
+  sc.addEventListener('mouseleave',()=>dn=false);
+  sc.addEventListener('mouseup',()=>dn=false);
+  sc.addEventListener('mousemove',e=>{if(!dn)return;e.preventDefault();sc.scrollLeft=sl-(e.pageX-sc.offsetLeft-sx)*1.4});
+}
+
+/* FAQ */
+document.querySelectorAll('.faq-item').forEach(item=>{
+  item.addEventListener('click',()=>{
+    const o=item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(i=>i.classList.remove('open'));
+    if(!o)item.classList.add('open');
+  });
+});
+
+/* NAV ACTIVE */
+const navAs=document.querySelectorAll('.nav-links a');
+const secs=document.querySelectorAll('section[id]');
+window.addEventListener('scroll',()=>{
+  let cur='';
+  secs.forEach(s=>{if(window.scrollY>=s.offsetTop-130)cur=s.id});
+  navAs.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+cur));
+},{passive:true});
+
+/* QUIZ */
+const questions=[
+  {q:'What sounds like <em>your</em> kind of day?',opts:[
+    {l:'Making something with your hands',s:'Building, fixing, creating physical things',t:['trades','culinary','auto']},
+    {l:'Helping people feel better',s:'Care, support, health, wellness',t:['healthcare']},
+    {l:'Figuring out how systems work',s:'Tech, logistics, operations',t:['tech','logistics','drone']},
+    {l:'Designing and building spaces',s:'Architecture, construction, spatial thinking',t:['construction','trades']}
+  ]},
+  {q:"What's your relationship with debt?",opts:[
+    {l:'Zero debt, full stop',s:'Apprenticeships and grant programs only',t:['trades','healthcare']},
+    {l:'A little if the ceiling is high',s:'Short programs with strong ROI',t:['tech','culinary','construction']},
+    {l:'I want to own a business someday',s:'Paths that lead to self-employment',t:['trades','auto','culinary']},
+    {l:'I need income fast — like, now',s:'Fastest paths to first paycheck',t:['healthcare','logistics','trades']}
+  ]},
+  {q:'How do you want to work?',opts:[
+    {l:'Outdoors or on a job site',s:'Variety, movement, physical engagement',t:['trades','construction','logistics']},
+    {l:'With a team of specialists',s:'Collaborative, high-skill environments',t:['healthcare','construction','trades']},
+    {l:'Independently or running my own thing',s:'Freedom, ownership, direct client work',t:['auto','culinary','trades','drone']},
+    {l:'In a fast-moving environment',s:'Kitchens, logistics, active worksites',t:['culinary','logistics','healthcare']}
+  ]}
+];
+const results={
+  trades:{n:'Skilled Trades',d:"Electrical, HVAC, plumbing, or welding — earn while you learn, zero debt, and a business ownership path within a decade.",s:[{v:'$41/hr',k:'Electrician Rate'},{v:'$0',k:'IBEW Tuition'},{v:'4 yrs',k:'To Journeyman'}]},
+  healthcare:{n:'Healthcare Tech',d:"CNA, surgical tech, medical assistant — work in a field that doesn't slow down. 12-week to 18-month programs. Many employers pay your tuition.",s:[{v:'$38K+',k:'CNA Starting'},{v:'12 wks',k:'CNA Cert'},{v:'Growing',k:'Job Market'}]},
+  culinary:{n:'Culinary Arts',d:"Louisville is a food city. Stage in a real kitchen. JCTC has a formal program. The fastest path in isn't always culinary school.",s:[{v:'$0',k:'Stage Cost'},{v:'$65K+',k:'Chef Ceiling'},{v:'Real',k:'Louisville Market'}]},
+  construction:{n:'Construction & Design',d:"ACE Mentor and construction management tracks from job site to project management. Louisville's $12B boom is the opportunity.",s:[{v:'$70K+',k:'Project Mgr'},{v:'Free',k:'ACE Mentor'},{v:'$12B',k:'Active Pipeline'}]},
+  logistics:{n:'CDL & Logistics',d:"Louisville is a logistics hub. CDL-A in seven weeks. Many carriers pay training. One of the most underrated paths in the city.",s:[{v:'$55K+',k:'Starting Pay'},{v:'7 wks',k:'CDL Training'},{v:'Hub City',k:'Louisville'}]},
+  tech:{n:'Tech & Digital',d:"Cybersecurity, UI design, IT support — no four-year degree required. Portfolio-first hiring is real. Remote opens the national market.",s:[{v:'$60K+',k:'IT Starting'},{v:'Remote',k:'Options Exist'},{v:'Fast',k:'Field Growth'}]},
+  auto:{n:'Automotive Tech',d:"Electric vehicles are transforming the field. JCTC runs programs. Business ownership is a real path within 5–8 years.",s:[{v:'$48K',k:'Tech Average'},{v:'Growing',k:'EV Demand'},{v:'JCTC',k:'Program'}]},
+  drone:{n:'Drone Mapping',d:"FAA Part 107 cert is $300. The collector model is real. High ceiling for someone willing to own the niche in Louisville.",s:[{v:'$300',k:'Part 107 Exam'},{v:'$65K+',k:'Year 3 Ceiling'},{v:'Market Gap',k:'Louisville'}]}
+};
+let answers=[],step=0;
+function renderQ(){
+  const q=questions[step];
+  document.querySelectorAll('.q-dot').forEach((d,i)=>{d.className='q-dot'+(i<step?' done':i===step?' active':'')});
+  document.getElementById('quiz-step-label').textContent=`Question ${step+1} of ${questions.length}`;
+  document.getElementById('quiz-q-text').innerHTML=q.q;
+  document.getElementById('quiz-opts').innerHTML=q.opts.map((o,i)=>
+    `<button class="quiz-opt" onclick="pick(${i})"><div class="quiz-opt-label">${o.l}</div><div class="quiz-opt-sub">${o.s}</div></button>`
+  ).join('');
+  document.querySelectorAll('.quiz-opt').forEach(opt=>{
+    opt.addEventListener('mousemove',e=>{
+      const r=opt.getBoundingClientRect();
+      opt.style.setProperty('--mx',((e.clientX-r.left)/r.width*100).toFixed(1)+'%');
+      opt.style.setProperty('--my',((e.clientY-r.top)/r.height*100).toFixed(1)+'%');
+    });
+  });
+  const qEl=document.getElementById('quiz-question');
+  qEl.classList.remove('on');
+  requestAnimationFrame(()=>requestAnimationFrame(()=>qEl.classList.add('on')));
+}
+function pick(i){
+  answers.push(questions[step].opts[i].t);step++;
+  if(step<questions.length)renderQ();else showResult();
+}
+function showResult(){
+  const tally={};
+  answers.flat().forEach(t=>tally[t]=(tally[t]||0)+1);
+  const top=Object.entries(tally).sort((a,b)=>b[1]-a[1])[0]?.[0]||'trades';
+  const res=results[top]||results.trades;
+  document.getElementById('qr-pathway-name').textContent=res.n;
+  document.getElementById('qr-pathway-desc').textContent=res.d;
+  document.getElementById('qr-stats').innerHTML=res.s.map(s=>`<div><span class="qr-sv">${s.v}</span><span class="qr-sk">${s.k}</span></div>`).join('');
+  document.getElementById('quiz-question').style.display='none';
+  document.getElementById('quiz-result').classList.add('show');
+}
+document.getElementById('quiz-reset').addEventListener('click',()=>{
+  answers=[];step=0;
+  document.getElementById('quiz-question').style.display='';
+  document.getElementById('quiz-result').classList.remove('show');
+  renderQ();
+});
+renderQ();
+
+/* FORM */
+function handleSubmit(e){e.preventDefault();const b=e.target.querySelector('.f-submit');b.textContent='Submitted — Thank you';b.disabled=true;b.style.opacity='.7'}
+</script>
+</body>
+</html>
