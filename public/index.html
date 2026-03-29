@@ -333,6 +333,61 @@
     .f-credit{font-family:var(--display);font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--z600)}
     .f-credit span{color:var(--ox)}
 
+    /* SCROLL QUESTION BREAKS */
+    .sqb{background:var(--z950);padding:100px 40px;text-align:center;border-top:1px solid rgba(255,255,255,.04);border-bottom:1px solid rgba(255,255,255,.04);position:relative;overflow:hidden}
+    .sqb::before{content:'?';position:absolute;font-family:var(--display);font-size:36vw;font-weight:900;color:rgba(255,255,255,.018);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;line-height:1}
+    .sqb-inner{max-width:900px;margin:0 auto;position:relative;z-index:1}
+    .sqb-pre{font-family:var(--display);font-size:11px;font-weight:700;letter-spacing:.28em;text-transform:uppercase;color:var(--ox);display:flex;align-items:center;justify-content:center;gap:14px;margin-bottom:28px}
+    .sqb-pre::before,.sqb-pre::after{content:'';display:inline-block;width:28px;height:1px;background:var(--ox)}
+    .sqb-q{font-family:var(--display);font-size:clamp(28px,5.5vw,68px);font-weight:900;line-height:.95;text-transform:uppercase;color:var(--w)}
+    .sqb-q em{font-style:normal;color:var(--ox)}
+
+    /* MENTORS */
+    .mentors{background:var(--w);padding:120px 40px}
+    .mentor-grid{max-width:var(--max);margin:52px auto 0;display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+    .mentor-card{background:var(--z50);border:1px solid var(--z100);overflow:hidden;transition:border-color .25s,transform .3s cubic-bezier(.16,1,.3,1);position:relative}
+    .mentor-card::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at var(--mx,50%) var(--my,50%),rgba(255,85,0,.06) 0%,transparent 65%);opacity:0;transition:opacity .3s;pointer-events:none;z-index:0}
+    .mentor-card:hover{border-color:var(--ox);transform:translateY(-4px)}
+    .mentor-card:hover::before{opacity:1}
+    .mentor-img{height:220px;overflow:hidden;position:relative}
+    .mentor-img img{width:100%;height:100%;object-fit:cover;filter:grayscale(.5) contrast(1.05);transition:filter .5s,transform .65s ease}
+    .mentor-card:hover .mentor-img img{filter:grayscale(.1);transform:scale(1.04)}
+    .mentor-img-ov{position:absolute;bottom:0;left:0;right:0;height:80px;background:linear-gradient(to top,var(--z50),transparent)}
+    .mentor-body{padding:28px 26px;position:relative;z-index:1}
+    .mentor-tag{font-family:var(--display);font-size:10px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:var(--ox);margin-bottom:8px}
+    .mentor-name{font-family:var(--display);font-size:22px;font-weight:900;text-transform:uppercase;color:var(--z950);line-height:1;margin-bottom:4px}
+    .mentor-role{font-family:var(--display);font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--z400);margin-bottom:16px}
+    .mentor-quote{font-size:14px;line-height:1.72;color:var(--z600);font-style:italic;margin-bottom:20px;padding-left:14px;border-left:2px solid var(--ox)}
+    .mentor-connect{font-family:var(--display);font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--ox);display:inline-flex;align-items:center;gap:6px;transition:gap .2s;cursor:pointer;background:none;border:none;padding:0}
+    .mentor-connect:hover{gap:12px}
+    .mentor-connect::after{content:'→'}
+
+    .mentor-invite{max-width:var(--max);margin:52px auto 0;background:var(--z950);padding:72px 80px;display:grid;grid-template-columns:6fr 4fr;gap:80px;align-items:center}
+    .mi-eyebrow{font-family:var(--display);font-size:11px;font-weight:700;letter-spacing:.26em;text-transform:uppercase;color:var(--ox);margin-bottom:16px;display:flex;align-items:center;gap:10px}
+    .mi-eyebrow::before{content:'';display:inline-block;width:20px;height:2px;background:var(--ox)}
+    .mi-h3{font-family:var(--display);font-size:clamp(32px,4vw,58px);font-weight:900;line-height:.93;text-transform:uppercase;color:var(--w);margin-bottom:20px}
+    .mi-h3 em{font-style:normal;color:var(--ox)}
+    .mi-body{font-size:15px;line-height:1.78;color:var(--z300);margin-bottom:28px}
+    .mi-tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:32px}
+    .mi-tag{font-family:var(--display);font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--w);background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);padding:5px 12px;border-radius:2px}
+    .mi-panel{display:flex;flex-direction:column;gap:0;padding:36px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);border-left:3px solid var(--ox)}
+    .mi-stat{padding:18px 0;border-bottom:1px solid rgba(255,255,255,.05)}
+    .mi-stat:last-child{border-bottom:none;padding-bottom:0}
+    .mi-stat:first-child{padding-top:0}
+    .mi-sv{font-family:var(--display);font-size:38px;font-weight:900;color:var(--ox);line-height:1;display:block}
+    .mi-sk{font-family:var(--display);font-size:10px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--z400);margin-top:4px;display:block}
+
+    /* PARENT STORY — top of parents section */
+    .parent-story{max-width:var(--max);margin:0 auto 64px;display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    .ps-img{position:relative;overflow:hidden;min-height:320px}
+    .ps-img img{width:100%;height:100%;object-fit:cover;filter:grayscale(.3)}
+    .ps-img-ov{position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,85,0,.15),transparent 60%)}
+    .ps-content{background:var(--z950);padding:52px 48px;display:flex;flex-direction:column;justify-content:center}
+    .ps-pull{font-family:var(--display);font-size:clamp(18px,2.2vw,28px);font-weight:900;text-transform:uppercase;line-height:1.1;color:var(--w);margin-bottom:20px;padding-left:18px;border-left:3px solid var(--ox)}
+    .ps-body{font-size:14px;line-height:1.78;color:var(--z300);margin-bottom:24px}
+    .ps-who{font-family:var(--display);font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--w)}
+    .ps-path{font-family:var(--display);font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--ox);margin-top:4px}
+
     /* MOBILE */
     @media(max-width:960px){
       nav{padding:0 20px}.nav-links{display:none}
@@ -351,8 +406,12 @@
       .voices-grid{grid-template-columns:1fr}.voice-card.offset{margin-top:0}.voice-card.wide{grid-column:span 1;display:block}
       .footer-top{grid-template-columns:1fr;gap:32px}
       .strip-inner{flex-direction:column;text-align:center}
-      .pathways,.voices,.orgs,.dispatch{padding:80px 20px}
+      .pathways,.voices,.orgs,.dispatch,.mentors{padding:80px 20px}
       .quiz{padding:80px 20px}.quiz-opts{grid-template-columns:1fr}.qr-stats{gap:28px}
+      .sqb{padding:72px 20px}
+      .mentor-grid{grid-template-columns:1fr}
+      .mentor-invite{grid-template-columns:1fr;gap:40px;padding:52px 28px}
+      .parent-story{grid-template-columns:1fr}.ps-img{min-height:220px}.ps-content{padding:36px 28px}
     }
   </style>
 </head>
@@ -371,7 +430,8 @@
     <li><a href="#pathways">Pathways</a></li>
     <li><a href="#quiz">Find Your Thing</a></li>
     <li><a href="#voices">Stories</a></li>
-    <li><a href="#parents">For Parents</a></li>
+    <li><a href="#mentors">Heroes</a></li>
+    <li><a href="#parents">Parents</a></li>
     <li><a href="#orgs">Resources</a></li>
   </ul>
   <a href="#contribute" class="nav-cta"><span>Share Your Path</span></a>
@@ -391,7 +451,7 @@
     </div>
   </div>
   <div class="hero-right">
-    <div class="hero-img-wrap" id="hero-img"></div>
+    <div class="hero-img-wrap" id="hero-img" style="background-image:url('https://picsum.photos/seed/young-apprentice-trades-wiring/900/1100')"></div>
   </div>
   <div class="hero-grain"></div>
   <div class="hero-wm">ALT</div>
@@ -417,6 +477,14 @@
     <span class="ticker-item">Construction Mgmt</span><span class="ticker-item">UI Design</span>
     <span class="ticker-item">Drone Mapping</span><span class="ticker-item">Cybersecurity</span>
     <span class="ticker-item">Fiber Optics</span><span class="ticker-item">Real Estate</span>
+  </div>
+</div>
+
+<!-- SCROLL Q: 1 -->
+<div class="sqb" aria-hidden="true">
+  <div class="sqb-inner">
+    <div class="sqb-pre sr">Ask yourself</div>
+    <div class="sqb-q sr d1">What would you choose if <em>debt</em><br>was never part of the equation?</div>
   </div>
 </div>
 
@@ -524,6 +592,14 @@
     <div class="stat-cell sr d3"><div class="stat-num"><span class="count" data-target="0">0</span><span class="ac"> debt</span></div><div class="stat-label">Required to start most<br>trade apprenticeships in KY</div></div>
   </div>
 </section>
+
+<!-- SCROLL Q: 2 -->
+<div class="sqb" aria-hidden="true">
+  <div class="sqb-inner">
+    <div class="sqb-pre sr">Be honest</div>
+    <div class="sqb-q sr d1">Who told you that was<br>a <em>backup plan?</em></div>
+  </div>
+</div>
 
 <!-- PITCH -->
 <section class="pitch" id="about">
@@ -658,6 +734,14 @@
   </div>
 </section>
 
+<!-- SCROLL Q: 3 -->
+<div class="sqb" aria-hidden="true">
+  <div class="sqb-inner">
+    <div class="sqb-pre sr">The real question</div>
+    <div class="sqb-q sr d1">What if the right person<br>was waiting to <em>show you the way in?</em></div>
+  </div>
+</div>
+
 <!-- VOICES -->
 <section class="voices" id="voices">
   <div class="voices-inner">
@@ -691,6 +775,92 @@
   </div>
 </section>
 
+<!-- HEROES + MENTORS -->
+<section class="mentors" id="mentors">
+  <div class="sec-head" style="max-width:var(--max);margin:0 auto 0">
+    <div class="eyebrow sr">Heroes + Mentors</div>
+    <h2 class="sec-h2 sr d1">The People Who <em>Open Doors</em></h2>
+    <p class="sec-desc sr d2">Every kid who finds their path has someone who helped them see it. These are those people — and there's room for you to be one of them.</p>
+  </div>
+
+  <div class="mentor-grid">
+    <div class="mentor-card sr">
+      <div class="mentor-img">
+        <img src="https://picsum.photos/seed/mentor-electrician-marcus/400/280" alt="Marcus J.">
+        <div class="mentor-img-ov"></div>
+      </div>
+      <div class="mentor-body">
+        <div class="mentor-tag">Electrical Trades · IBEW Local 369</div>
+        <div class="mentor-name">Marcus J.</div>
+        <div class="mentor-role">Journeyman Electrician · 11 Years In</div>
+        <p class="mentor-quote">"I was working at a warehouse making $13/hr. A coworker handed me an IBEW application and told me I was wasting my hands. That was the most important conversation of my life. I do that for other people now."</p>
+        <a href="#contribute" class="mentor-connect">Connect with Marcus</a>
+      </div>
+    </div>
+    <div class="mentor-card sr d1">
+      <div class="mentor-img">
+        <img src="https://picsum.photos/seed/mentor-chef-diana-kitchen/400/280" alt="Diana R.">
+        <div class="mentor-img-ov"></div>
+      </div>
+      <div class="mentor-body">
+        <div class="mentor-tag">Culinary Arts · Louisville Food Scene</div>
+        <div class="mentor-name">Diana R.</div>
+        <div class="mentor-role">Executive Chef · Restaurant Owner</div>
+        <p class="mentor-quote">"I paid $60K for culinary school and everything useful I learned was on the line. I mentor young cooks directly into kitchens now. A stage costs nothing. If you want in, reach out — I'll get you a shift."</p>
+        <a href="#contribute" class="mentor-connect">Connect with Diana</a>
+      </div>
+    </div>
+    <div class="mentor-card sr d2">
+      <div class="mentor-img">
+        <img src="https://picsum.photos/seed/mentor-engineer-ace-program/400/280" alt="Kevin T.">
+        <div class="mentor-img-ov"></div>
+      </div>
+      <div class="mentor-body">
+        <div class="mentor-tag">Construction Management · ACE Mentor</div>
+        <div class="mentor-name">Kevin T.</div>
+        <div class="mentor-role">Project Manager · ACE Mentor Volunteer</div>
+        <p class="mentor-quote">"I didn't go to architecture school. I started as a laborer at 19 and read everything I could get my hands on. Now I run $40M projects and mentor high schoolers through ACE. The field is wide open for people who want it."</p>
+        <a href="#contribute" class="mentor-connect">Connect with Kevin</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="mentor-invite sr">
+    <div>
+      <div class="mi-eyebrow">Be a Hero</div>
+      <h3 class="mi-h3">Your Story Could Be<br>The One That <em>Changes Everything.</em></h3>
+      <p class="mi-body">You've navigated a path most people don't know exists. Your career story, your professional contacts, your willingness to spend 20 minutes with someone who's figuring it out — that's worth more than any guidance counselor's default answer. ALT is building a network of connectors. We're not looking for credentials. We're looking for people who give a damn.</p>
+      <div class="mi-tags">
+        <span class="mi-tag">Working Professionals</span>
+        <span class="mi-tag">Journeymen &amp; Masters</span>
+        <span class="mi-tag">Business Owners</span>
+        <span class="mi-tag">Program Directors</span>
+        <span class="mi-tag">Parents Who've Been There</span>
+        <span class="mi-tag">Anyone With A Story</span>
+      </div>
+      <a href="#contribute" class="btn btn-fill mag-btn">Join the Mentor Network</a>
+    </div>
+    <div class="mi-panel">
+      <div class="mi-stat">
+        <span class="mi-sv">1 conversation</span>
+        <span class="mi-sk">Can change a career trajectory</span>
+      </div>
+      <div class="mi-stat">
+        <span class="mi-sv">20 minutes</span>
+        <span class="mi-sk">Is all a job shadow takes</span>
+      </div>
+      <div class="mi-stat">
+        <span class="mi-sv">$0</span>
+        <span class="mi-sk">Required to be a mentor here</span>
+      </div>
+      <div class="mi-stat">
+        <span class="mi-sv">Your path</span>
+        <span class="mi-sk">Is someone else's roadmap</span>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ORGS -->
 <section class="orgs" id="orgs">
   <div class="orgs-head">
@@ -714,9 +884,21 @@
 
 <!-- PARENTS -->
 <section class="parents" id="parents">
+  <div class="parent-story sr">
+    <div class="ps-img">
+      <img src="https://picsum.photos/seed/parent-child-conversation-hopeful/800/480" alt="Parent story">
+      <div class="ps-img-ov"></div>
+    </div>
+    <div class="ps-content">
+      <div class="ps-pull">"I realized I was more afraid of the unfamiliar than I was actually informed about it."</div>
+      <p class="ps-body">When my daughter told me she wanted to be a dental hygienist instead of a four-year university, my first reaction was disappointment. That reaction was completely about me and what I'd imagined — not about her future. The program is two years, tuition-covered by a scholarship, and she starts at $58K. She graduates in June. I've never been more proud or more humbled.</p>
+      <div class="ps-who">Renata H. — Parent, Louisville</div>
+      <div class="ps-path">Supporting a Healthcare Career Path</div>
+    </div>
+  </div>
   <div class="parents-inner">
     <div>
-      <div class="eyebrow sr">For Parents</div>
+      <div class="eyebrow sr">For Parents &amp; Guardians</div>
       <h2 class="parents-h2 sr d1">The Questions<br>You're<br><em>Actually</em><br>Asking</h2>
       <p class="parents-intro sr d2">You want your kid to be secure. That's the whole thing. Here's what the research actually says — without the guilt trip about college, and without the oversell on trades.</p>
     </div>
@@ -734,27 +916,36 @@
 <section class="contribute" id="contribute">
   <div class="contribute-inner">
     <div>
-      <div class="eyebrow" style="color:rgba(255,255,255,.7);margin-bottom:16px">Community</div>
-      <h2 class="c-h2">Share<br>What You<br>Know.</h2>
-      <p class="c-sub">ALT is built on real information from real people. If you have a story, a resource, a connection, or a question — this is where it goes.</p>
-      <p class="c-note" style="margin-top:16px">We review every submission. Good intel makes it into The Dispatch.</p>
+      <div class="eyebrow" style="color:rgba(255,255,255,.7);margin-bottom:16px">Join The Movement</div>
+      <h2 class="c-h2">Helpers<br>Helping<br>Helpers.</h2>
+      <p class="c-sub">This isn't a website. It's a network. If you have a story, a connection, a resource, or 20 minutes to give a young person a real look at your world — this is where it starts.</p>
+      <p class="c-sub" style="margin-top:12px">Every submission is read. Every mentor profile gets routed. Every story that resonates makes it into The Dispatch. <strong style="color:var(--w)">The only thing this community runs on is people showing up.</strong></p>
+      <p class="c-note" style="margin-top:20px">📬 Submissions route directly to our team — your contact info is never shared publicly.</p>
     </div>
-    <form class="c-form" onsubmit="handleSubmit(event)">
-      <div><label class="f-label" for="f-name">Your Name</label><input class="f-input" type="text" id="f-name" placeholder="First name is fine" required></div>
-      <div><label class="f-label" for="f-email">Email (optional)</label><input class="f-input" type="email" id="f-email" placeholder="Only if you want a follow-up"></div>
+    <form class="c-form" id="alt-form" onsubmit="handleSubmit(event)">
+      <!-- FormSubmit config — hidden from view -->
+      <input type="hidden" name="_subject" id="form-subject" value="ALT | New Submission">
+      <input type="hidden" name="_template" value="table">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
+
+      <div><label class="f-label" for="f-name">Your Name</label><input class="f-input" type="text" id="f-name" name="name" placeholder="First name is fine" required></div>
+      <div><label class="f-label" for="f-email">Email <span style="opacity:.6">(optional — only if you want a follow-up)</span></label><input class="f-input" type="email" id="f-email" name="email" placeholder="we keep this private"></div>
       <div>
-        <label class="f-label" for="f-type">What are you sharing?</label>
-        <select class="f-select" id="f-type">
+        <label class="f-label" for="f-type">What brings you here?</label>
+        <select class="f-select" id="f-type" name="type" onchange="document.getElementById('form-subject').value='ALT | '+this.value">
           <option value="">Choose one</option>
-          <option>My career story</option>
-          <option>A resource or organization</option>
-          <option>A question I can't find an answer to</option>
-          <option>A connection or mentor offer</option>
-          <option>Something for The Dispatch</option>
+          <option value="My career story">My career story — I want to share it</option>
+          <option value="I want to be a mentor">I want to be a mentor or connector</option>
+          <option value="I'm a parent looking for guidance">I'm a parent looking for guidance</option>
+          <option value="A resource or organization">A resource or org worth knowing</option>
+          <option value="A question I can't find an answer to">A question I can't find an answer to</option>
+          <option value="Something for The Dispatch">Something for The Dispatch</option>
+          <option value="I want to connect a young person">I want to connect a young person to opportunity</option>
         </select>
       </div>
-      <div><label class="f-label" for="f-msg">Tell us</label><textarea class="f-ta" id="f-msg" placeholder="Keep it real. We read everything." required></textarea></div>
-      <button type="submit" class="f-submit">Submit to ALT</button>
+      <div><label class="f-label" for="f-msg">Tell us — keep it real</label><textarea class="f-ta" id="f-msg" name="message" placeholder="We read everything. No fluff needed. Just tell us what's on your mind." required></textarea></div>
+      <button type="submit" class="f-submit mag-btn" id="form-btn">Send It →</button>
     </form>
   </div>
 </section>
@@ -773,8 +964,8 @@
       <p class="f-tagline">The careers nobody mapped. The paths nobody sold. Real stories, honest numbers, and a community that keeps the information alive.</p>
     </div>
     <div><div class="f-col-title">Navigate</div><ul class="f-links"><li><a href="#dispatch">The Dispatch</a></li><li><a href="#pathways">Pathways</a></li><li><a href="#quiz">Find Your Thing</a></li><li><a href="#voices">Stories</a></li></ul></div>
-    <div><div class="f-col-title">Support</div><ul class="f-links"><li><a href="#parents">For Parents</a></li><li><a href="#orgs">Resources</a></li><li><a href="#wyt">The Framework</a></li></ul></div>
-    <div><div class="f-col-title">Community</div><ul class="f-links"><li><a href="#contribute">Share Your Path</a></li><li><a href="#contribute">Submit to The Dispatch</a></li><li><a href="#contribute">Offer Mentorship</a></li></ul></div>
+    <div><div class="f-col-title">Connect</div><ul class="f-links"><li><a href="#mentors">Heroes + Mentors</a></li><li><a href="#parents">For Parents &amp; Guardians</a></li><li><a href="#orgs">Resources</a></li><li><a href="#wyt">The Framework</a></li></ul></div>
+    <div><div class="f-col-title">Join the Movement</div><ul class="f-links"><li><a href="#contribute">Share Your Story</a></li><li><a href="#contribute">Become a Mentor</a></li><li><a href="#contribute">Submit to The Dispatch</a></li><li><a href="#contribute">Ask a Question</a></li></ul></div>
   </div>
   <div class="footer-bottom">
     <span class="f-copy">&copy; 2026 ALT — Alternative Pathways for Careers. A community resource.</span>
@@ -988,8 +1179,36 @@ document.getElementById('quiz-reset').addEventListener('click',()=>{
 });
 renderQ();
 
-/* FORM */
-function handleSubmit(e){e.preventDefault();const b=e.target.querySelector('.f-submit');b.textContent='Submitted — Thank you';b.disabled=true;b.style.opacity='.7'}
+/* FORM — FormSubmit AJAX (email hidden from page, subject auto-labeled for Gmail filter) */
+async function handleSubmit(e){
+  e.preventDefault();
+  const form=e.target,btn=document.getElementById('form-btn');
+  btn.textContent='Sending...';btn.disabled=true;
+  try{
+    const data=new FormData(form);
+    const res=await fetch('https://formsubmit.co/ajax/ericwhitmore@gmail.com',{
+      method:'POST',body:data,headers:{'Accept':'application/json'}
+    });
+    if(res.ok){
+      btn.textContent='✓ Sent — We\'ll be in touch';
+      btn.style.background='var(--tl)';
+      form.reset();
+      document.getElementById('form-subject').value='ALT | New Submission';
+    } else {throw new Error()}
+  } catch{
+    btn.textContent='Something went wrong — try again';
+    btn.disabled=false;
+  }
+}
+
+/* SPOTLIGHT on mentor cards */
+document.querySelectorAll('.mentor-card').forEach(card=>{
+  card.addEventListener('mousemove',e=>{
+    const r=card.getBoundingClientRect();
+    card.style.setProperty('--mx',((e.clientX-r.left)/r.width*100).toFixed(1)+'%');
+    card.style.setProperty('--my',((e.clientY-r.top)/r.height*100).toFixed(1)+'%');
+  });
+});
 </script>
 </body>
 </html>
